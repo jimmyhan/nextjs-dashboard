@@ -120,13 +120,12 @@ export async function authenticate(
     await signIn("credentials", formData);
   } catch (error) {
     if (error instanceof AuthError) {
-      return error.message;
-      // switch (error.type) {
-      //   case "CredentialsSignin":
-      //     return "Invalid credentials.";
-      //   default:
-      //     return "Something went wrong.";
-      // }
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        default:
+          return "Something went wrong.";
+      }
     }
     throw error;
   }
